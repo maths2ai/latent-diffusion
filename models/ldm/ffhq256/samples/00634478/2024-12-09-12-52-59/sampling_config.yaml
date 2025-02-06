@@ -1,0 +1,9 @@
+base:
+- models/ldm/ffhq256/config.yaml
+batch_size: 2
+custom_steps: 2
+eta: 0.0
+logdir: none
+n_samples: 4
+resume: models/ldm/ffhq256/model.ckpt
+vanilla_sample: false

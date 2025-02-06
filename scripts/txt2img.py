@@ -11,6 +11,10 @@ from ldm.util import instantiate_from_config
 from ldm.models.diffusion.ddim import DDIMSampler
 from ldm.models.diffusion.plms import PLMSSampler
 
+sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
+torch.set_default_device("cpu")
+# torch.set_default_dtype(torch.float32)
+device = torch.device("cpu")
 
 def load_model_from_config(config, ckpt, verbose=False):
     print(f"Loading model from {ckpt}")
@@ -25,7 +29,7 @@ def load_model_from_config(config, ckpt, verbose=False):
         print("unexpected keys:")
         print(u)
 
-    model.cuda()
+    model.to(device)
     model.eval()
     return model
 

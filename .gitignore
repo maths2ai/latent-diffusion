@@ -1,0 +1,10 @@
+data/
+logs/
+outputs/
+**.pyc
+configs/first_stage_models/
+models/first_stage_models/
+**.pth
+models/ldm/text2img-large/model.ckpt
+models/ldm/ffhq256/model.ckpt
+**.npz

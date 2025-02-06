@@ -56,7 +56,7 @@ class BERTTokenizer(AbstractEncoder):
         super().__init__()
         from transformers import BertTokenizerFast  # TODO: add to reuquirements
         self.tokenizer = BertTokenizerFast.from_pretrained("bert-base-uncased")
-        self.device = device
+        self.device = 'cpu'
         self.vq_interface = vq_interface
         self.max_length = max_length
 
@@ -85,14 +85,14 @@ class BERTEmbedder(AbstractEncoder):
         self.use_tknz_fn = use_tokenizer
         if self.use_tknz_fn:
             self.tknz_fn = BERTTokenizer(vq_interface=False, max_length=max_seq_len)
-        self.device = device
+        self.device = 'cpu'
         self.transformer = TransformerWrapper(num_tokens=vocab_size, max_seq_len=max_seq_len,
                                               attn_layers=Encoder(dim=n_embed, depth=n_layer),
                                               emb_dropout=embedding_dropout)
 
     def forward(self, text):
         if self.use_tknz_fn:
-            tokens = self.tknz_fn(text)#.to(self.device)
+            tokens = self.tknz_fn(text).to(self.device)
         else:
             tokens = text
         z = self.transformer(tokens, return_embeddings=True)

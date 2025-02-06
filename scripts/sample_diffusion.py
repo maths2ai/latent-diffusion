@@ -10,6 +10,11 @@ from PIL import Image
 from ldm.models.diffusion.ddim import DDIMSampler
 from ldm.util import instantiate_from_config
 
+sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
+torch.set_default_device("cpu")
+# torch.set_default_dtype(torch.float32)
+device = torch.device("cpu")
+
 rescale = lambda x: (x + 1.) / 2.
 
 def custom_to_pil(x):
@@ -220,7 +225,7 @@ def get_parser():
 def load_model_from_config(config, sd):
     model = instantiate_from_config(config)
     model.load_state_dict(sd,strict=False)
-    model.cuda()
+    model.to(device)
     model.eval()
     return model
 

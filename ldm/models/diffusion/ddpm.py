@@ -331,6 +331,7 @@ class DDPM(pl.LightningModule):
         if len(x.shape) == 3:
             x = x[..., None]
         x = rearrange(x, 'b h w c -> b c h w')
+        # TODO Ask CGPT WHAT THIS DOES PRECISELY AND WHY IT MIGHT BE IMPORTANT
         x = x.to(memory_format=torch.contiguous_format).float()
         return x
 
@@ -435,10 +436,12 @@ class LatentDiffusion(DDPM):
                  scale_factor=1.0,
                  scale_by_std=False,
                  *args, **kwargs):
+        # TODO try to understand num_timestep_cond
         self.num_timesteps_cond = default(num_timesteps_cond, 1)
         self.scale_by_std = scale_by_std
         assert self.num_timesteps_cond <= kwargs['timesteps']
         # for backwards compatibility after implementation of DiffusionWrapper
+        # TODO try to understand better concat conditioning
         if conditioning_key is None:
             conditioning_key = 'concat' if concat_mode else 'crossattn'
         if cond_stage_config == '__is_unconditional__':
