@@ -1,3 +1,77 @@
+#
+To run the code use the following launch.json file:
+
+///
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Run main.py",
+        "type": "python",
+        "request": "launch",
+        "program": "${workspaceFolder}/main.py",
+        "console": "integratedTerminal",
+        "args": [
+          "--base", "configs/latent-diffusion/ffhq-ldm-vq-4.yaml",
+          "-t"
+        ],
+        "env": {
+        },
+        "justMyCode": true
+      },
+      {
+        "name": "Run main.py for variational autoencoder",
+        "type": "python",
+        "request": "launch",
+        "program": "${workspaceFolder}/main.py",
+        "console": "integratedTerminal",
+        "args": [
+          "--base", "configs/autoencoder/autoencoder_kl_64x64x3.yaml",
+          "-t"
+        ],
+        "env": {
+        },
+        "justMyCode": true
+      },{
+        "name": "Run main with imagenet.py",
+        "type": "python",
+        "request": "launch",
+        "program": "${workspaceFolder}/main.py",
+        "console": "integratedTerminal",
+        "args": [
+          "--base", "configs/latent-diffusion/cin-ldm-vq-f8.yaml",
+          "-t"
+        ],
+        "env": {
+        },
+        "justMyCode": true
+      },
+
+      {
+        "name": "Run coco.py",
+        "type": "python",
+        "request": "launch",
+        "program": "${workspaceFolder}/main.py",
+        "console": "integratedTerminal",
+        "args": [
+          "--base", "configs/latent-diffusion/coco.yaml",
+          "-t"
+        ],
+        "env": {
+        },
+        "justMyCode": true
+      },
+
+    ]
+  }
+///
+
+Run main.py is used to run a simple stable diffusion.
+Run coco.py is used to run che conditioning model.
+
+
+
+
 # Latent Diffusion Models
 [arXiv](https://arxiv.org/abs/2112.10752) | [BibTeX](#bibtex)
 
