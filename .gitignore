@@ -1,4 +1,7 @@
-data/
+data/coco
+data/ffhq
+data/faceshq
+data/.DS_Store
 logs/
 outputs/
 **.pyc
